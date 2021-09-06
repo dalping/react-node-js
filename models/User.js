@@ -4,29 +4,33 @@ const saltRounds = 10; //salt 몇자리 수?
 const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
-    name:{
-        type:String,
+    name: {
+        type: String,
         maxlength: 50
     },
-    email: { 
-        type:String,
-        trim:true, //공백 삭제
+    email: {
+        type: String,
+        trim: true,
         unique: 1
     },
-    password:{
-        type:String,
+    password: {
+        type: String,
         minlength: 5
     },
-    role:{//관리자&일반유저
-        type:Number,
-        default:0 //값을 입력하지 않을 시 디폴트 값
+    lastname: {
+        type: String,
+        maxlength: 50
     },
-    image:String,
-    token:{
-        type:String
+    role: {
+        type: Number,
+        default: 0
     },
-    tokenExp:{//토큰을 사용할 수 있는 기간
-        type:Number
+    image: String,
+    token: {
+        type: String,
+    },
+    tokenExp: {
+        type: Number
     }
 })
 
@@ -71,6 +75,23 @@ userSchema.methods.generateToken = function(cb){
         if(err) return cb(err)
         cb(null, user)
     });
+}
+
+userSchema.statics.findByToken = function(token, cb) {
+
+    var user = this;
+    //user._id + '' = token;
+    jwt.verify(token, 'secretToken',function(err, decoded){
+        //유저 아이디를 이용해서 유저를 찾은 다음에
+        //클라이언트에서 가져온 token과 db에 보관된 토큰이 일치하는지 확인
+
+        user.findOne({"_id":decoded, "token":token}, function(err, user){
+
+            if(err) return cb(err);
+            cb(null, user)
+
+        })
+    })
 }
 
 const User = mongoose.model('User', userSchema)
