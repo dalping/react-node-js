@@ -30,6 +30,10 @@ function RegisterPage(props) {
     const onSubmitHandler = (e) =>{
         e.preventDefault();
 
+        if(Password.length < 5){
+            return alert('비밀번호를 5자 이상 입력해주세요.');
+        }
+
         if(Password !== ConfirmPassword){
             return alert('비밀번호가 다릅니다.'); 
         }
@@ -43,7 +47,7 @@ function RegisterPage(props) {
         dispatch(registerUser(body))
         .then(res=>{
             if(res.payload.success){ 
-                props.history.push('/')
+                props.history.push('/login')
             }else{
                 alert('Error');
             }
