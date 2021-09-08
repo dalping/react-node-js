@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 5000
+
 const cookieParser = require('cookie-parser')
 const bodyParder = require('body-parser')
 const {User} = require('./models/User');
@@ -12,11 +13,12 @@ app.use(bodyParder.urlencoded({extended:true}));
 app.use(bodyParder.json());
 const {auth} = require('./middleware/auth');
 app.use(cookieParser());
+
 //mongoDB connect
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoURI,{
-    useNewUrlParser : true, useUnifiedTopology: true
-}).then(()=>console.log('Mongo db Connected...'))
+    useNewUrlParser : true, useUnifiedTopology : true //오류 발생 방지
+}).then(()=>console.log('MongoDB connected...'))
 .catch(err => console.log(err))
 
 app.get('/',(req,res)=>{
@@ -36,7 +38,7 @@ app.post('/api/users/register',(req,res)=>{
 
 app.post('/api/users/login', (req,res) =>{
     
-    //요청된 이메일을 db에 있는지 찾는다
+    //db에서 요청된 이메일을 찾는다
     User.findOne({email:req.body.email},(err,user)=>{
 
         if(!user){
@@ -47,7 +49,7 @@ app.post('/api/users/login', (req,res) =>{
             })
         }
 
-        user.comparePassword(req.body.password, (err,isMatch) => {
+            user.comparePassword(req.body.password,(err,isMatch) => {
 
             if(!isMatch) return res.json({
                 loginSuccess:false,

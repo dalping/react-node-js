@@ -49,7 +49,7 @@ function RegisterPage(props) {
             if(res.payload.success){ 
                 props.history.push('/login')
             }else{
-                alert('Error');
+                alert('로그인을 실패했습니다.');
             }
         })
 

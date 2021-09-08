@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10; //salt 몇자리 수?
 const jwt = require('jsonwebtoken');
 
-const userSchema = mongoose.Schema({
+
+const userSchema = mongoose.Schema({ //스키마 정의 생성자 구조만 정의 함
     name: {
         type: String,
         maxlength: 50
@@ -14,7 +15,7 @@ const userSchema = mongoose.Schema({
         unique: 1
     },
     password: {
-        type: String,
+        type: String, //암호화 할 때 다른 문자도 들어가므로..
         minlength: 5
     },
     lastname: {
@@ -34,6 +35,7 @@ const userSchema = mongoose.Schema({
     }
 })
 
+//pre : 어떤 작업을 하기 직전(유저 정보를 저장하기 직전)에 암호화 하기
 userSchema.pre('save',function(next){
     
     var user = this;
@@ -47,8 +49,7 @@ userSchema.pre('save',function(next){
             // Store hash in your password DB.
             user.password = hash //해시된 비밀번호로 교체
             next()
-            
-            });
+            }); 
         });
     }else{ //비밀번호 변경 아님
         next() 
@@ -94,6 +95,7 @@ userSchema.statics.findByToken = function(token, cb) {
     })
 }
 
-const User = mongoose.model('User', userSchema)
+//mongoose.model(modelName, schema); 스키마 정의 사용
+const User = mongoose.model('User', userSchema) //컬렉션 지정
 
-module.exports = {User} //다른 곳에서도 이 모듈을 쓸 수 있게
+module.exports = {User} 

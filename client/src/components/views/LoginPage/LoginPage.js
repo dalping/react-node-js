@@ -21,6 +21,8 @@ function LoginPage(props) {
     const onSubmitHandler = (e) =>{
         e.preventDefault(); //page refresh 방지
 
+        if(Email === '' || Password ==='') return alert('아이디와 비밀번호를 입력하세요.')
+
         let body = {
             email:Email,
             password:Password
@@ -31,7 +33,8 @@ function LoginPage(props) {
             if(res.payload.loginSuccess){ //로그인 성공시
                 props.history.push('/')
             }else{
-                alert('Error');
+                if(res.payload.err_type === "not_exist_email" || res.payload.err_type === "wrong_password" ) 
+                    return alert('아이디와 비밀번호를 다시 확인해주세요.');                
             }
         })
     }

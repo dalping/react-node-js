@@ -1,4 +1,4 @@
-import {LOGIN_USER,REGISTER_USER} from '../_actions/types';
+import {LOGIN_USER, REGISTER_USER} from '../_actions/types';
 
 export default function user_reducer(state = {}, action) {
     switch(action.type){
@@ -9,7 +9,7 @@ export default function user_reducer(state = {}, action) {
         case REGISTER_USER:
             return {...state, registerSuccess:action.payload}
             break;
-            
+
         default:
             return state;
     }
