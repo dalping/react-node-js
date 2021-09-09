@@ -1,0 +1,64 @@
+@import "~antd/dist/antd.css";
+
+.menu {
+  padding: 0 20px;
+  /* border-bottom: solid 1px #e8e8e8; */
+  overflow: auto;
+  box-shadow: 0 0 20px #c2c2c2;
+  background-color: #98ddca;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.menu_logo {
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  height: 100%;
+}
+
+.menu_logo a {
+  color: rgb(110, 110, 110);
+  font-style: italic;
+  font-weight: 1000;
+}
+
+.menu_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+.menu_content a {
+  font-size: 1.2em;
+  color: white;
+}
+
+.navbar_left {
+  display: flex;
+}
+
+.navbar_right {
+  display: flex;
+}
+
+.navbar_item {
+  padding: 15px 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+  }
+}

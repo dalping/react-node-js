@@ -3,17 +3,19 @@ import {BrowserRouter as Router, Switch,Route} from "react-router-dom";
 
 import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
+import NavBar from './components/views/NavBar/NavBar';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
-import MyPage from './components/views/MyPage/MyPage';
+// import MyPage from './components/views/MyPage/MyPage';
 import Auth from './hoc/auth';
 
 function App() {
   return (
     <Router>
       <div>
+        <NavBar/>
         <Switch>
           <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route exact path="/mypage" component={Auth(MyPage, true)} />
+          {/* <Route exact path="/mypage" component={Auth(MyPage, true)} /> */}
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
         </Switch>
