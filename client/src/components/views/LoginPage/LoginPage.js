@@ -2,9 +2,11 @@
 import React,{ useState } from 'react';
 import {useDispatch} from 'react-redux';
 import {loginUser} from '../../../_actions/user_action';
+import {withRouter} from  'react-router-dom';
 
 function LoginPage(props) {
 
+    console.log(props)
     const dispatch = useDispatch();
 
     const [Email, setEmail] = useState("");
@@ -21,7 +23,7 @@ function LoginPage(props) {
     const onSubmitHandler = (e) =>{
         e.preventDefault(); //page refresh 방지
 
-        if(Email === '' || Password ==='') return alert('아이디와 비밀번호를 입력하세요.')
+        if(Email === ''|| Password ==='') return alert('아이디와 비밀번호를 입력하세요.')
 
         let body = {
             email:Email,
@@ -55,4 +57,4 @@ function LoginPage(props) {
     )
 }
 
-export default LoginPage
+export default withRouter(LoginPage)
