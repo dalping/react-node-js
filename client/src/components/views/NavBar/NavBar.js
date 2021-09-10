@@ -18,7 +18,7 @@ function NavBar() {
                 <div className="menu_content">
                     <div className="navbar_left">
                         <div className="navbar_item">
-                            <a href="/">Blog</a>
+                            <a href="/">Home</a>
                         </div>
                         <div className="navbar_item">
                             <a href="/">MyPage</a>
