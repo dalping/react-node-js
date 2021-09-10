@@ -63,6 +63,15 @@
   .menu {
     flex-direction: column;
   }
+
+  .menu_logo {
+    padding: 10px 0;
+  }
+
+  .menu_content {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 @font-face {
